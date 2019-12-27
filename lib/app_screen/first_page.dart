@@ -1,259 +1,126 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:sample_app/app_screen/second_page.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import './ezvzjson.dart';
 
 class FirstPage extends StatefulWidget {
+  
+
+
+//  FirstPage.name(this.filter);
+
   @override
   _FirstPageState createState() => _FirstPageState();
 
-
+//  FirstPage();
 }
 
 class _FirstPageState extends State<FirstPage> {
 
-  var value = 0;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    generateRandom();
-  }
+  List<Datum> widgets = [];
+  List<String> items = [];
+  String filter;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Sample App1"),),
-      body:  Material(
-          color: Colors.grey[50],
-          child : Center(
-            child:  Card(
-                margin: EdgeInsets.all(10.0),
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.white, width: 1),
-                    borderRadius: BorderRadius.circular(15.0)
-                ),
-                elevation: 10,
-                semanticContainer: true,
-                child : Wrap(
-                  children : <Widget>[
-                    Container(
-                        width : MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.all(10.0),
-                        child : Center(
-                            child : FittedBox(
-                              fit: BoxFit.cover,
-                              child : Text(
-                                "Your luckynumber is : $value ",
-                                textDirection: TextDirection.ltr,
-                                style: TextStyle(
-                                    fontSize: 40.0,
-                                    fontStyle: FontStyle.italic
-                                ),
-                              ),
-                            )
-                        )
-                    ),
-                  ],
-                )
-            ),
-          )
-//         child : SingleChildScrollView(
-//           child:  Row (
-////             mainAxisSize: MainAxisSize.max,
-//                 children : <Widget>[
-//                   Card(
-//
-//                       margin: EdgeInsets.all(10.0),
-//                       color: Colors.white,
-//                       shape: RoundedRectangleBorder(
-//                           side: BorderSide(color: Colors.white, width: 1),
-//                           borderRadius: BorderRadius.circular(15.0)
-//                       ),
-//                       elevation: 10,
-//                       semanticContainer: true,
-//                       child : Wrap(
-//                         children : <Widget>[
-//                           Container(
-//                              width : MediaQuery.of(context).size.width / 3,
-//                               padding: EdgeInsets.all(10.0),
-//                               child : Center(
-//                                 child : Text(
-//                                   "hello flutter dadadas dsada dadas dadsa dasdsad dasdasd dasdas dasdaaasd dsda das ",
-//                                   textDirection: TextDirection.ltr,
-//                                   style: TextStyle(
-//                                       fontSize: 40.0,
-//                                       fontStyle: FontStyle.italic
-//                                   ),
-//
-//                                 ),
-//                               )
-//                           ),
-//                         ],
-//                       )
-//
-//
-//                   ),
-//
-//                   Card(
-//                       margin: EdgeInsets.all(10.0),
-//                       color: Colors.green,
-//                       shape: RoundedRectangleBorder(
-//                           side: BorderSide(color: Colors.green, width: 1),
-//                           borderRadius: BorderRadius.circular(15.0)
-//                       ),
-//                       elevation: 10,
-//                       semanticContainer: true,
-//                       child : Wrap(
-//                         children : <Widget>[
-//                           Container(
-//                               width : MediaQuery.of(context).size.width / 3,
-//                               padding: EdgeInsets.all(10.0),
-//                               child : Center(
-//                                 child : Text(
-//                                   "yellow flutter dadadas dsada dadas dadsa dasdsad dasdasd dasdas dasdaaasd dsda das ",
-//                                   textDirection: TextDirection.ltr,
-//                                   style: TextStyle(
-//                                       fontSize: 40.0,
-//                                       fontStyle: FontStyle.italic
-//                                   ),
-//
-//                                 ),
-//                               )
-//                           ),
-//                         ],
-//                       )
-//
-//
-//                   ),
-//
-//                   Card(
-//                       margin: EdgeInsets.all(10.0),
-//                       color: Colors.yellow,
-//                       shape: RoundedRectangleBorder(
-//                           side: BorderSide(color: Colors.yellow, width: 1),
-//                           borderRadius: BorderRadius.circular(15.0)
-//                       ),
-//                       elevation: 10,
-//                       semanticContainer: true,
-//                       child : Wrap(
-//                         children : <Widget>[
-//                           Container(
-//                               width : MediaQuery.of(context).size.width / 3,
-//                               padding: EdgeInsets.all(10.0),
-//                               child : Center(
-//                                 child : Text(
-//                                   "Green flutter dadadas dsada dadas dadsa dasdsad dasdasd dasdas dasdaaasd dsda das ",
-//                                   textDirection: TextDirection.ltr,
-//                                   style: TextStyle(
-//                                       fontSize: 40.0,
-//                                       fontStyle: FontStyle.italic
-//                                   ),
-//
-//                                 ),
-//                               )
-//                           ),
-//                         ],
-//                       )
-//
-//
-//                   ),
-//
-//                   Card(
-//                       margin: EdgeInsets.all(10.0),
-//                       color: Colors.blue,
-//                       shape: RoundedRectangleBorder(
-//                           side: BorderSide(color: Colors.blue, width: 1),
-//                           borderRadius: BorderRadius.circular(15.0)
-//                       ),
-//                       elevation: 10,
-//                       semanticContainer: true,
-//                       child : Wrap(
-//                         children : <Widget>[
-//                           Container(
-//                               width : MediaQuery.of(context).size.width / 3,
-//                               padding: EdgeInsets.all(10.0),
-//                               child : Center(
-//                                 child : Text(
-//                                   "Red flutter dadadas dsada dadas dadsa dasdsad dasdasd dasdas dasdaaasd dsda das ",
-//                                   textDirection: TextDirection.ltr,
-//                                   style: TextStyle(
-//                                       fontSize: 40.0,
-//                                       fontStyle: FontStyle.italic
-//                                   ),
-//
-//                                 ),
-//                               )
-//                           ),
-//                         ],
-//                       )
-//
-//
-//                   ),
-//
-//                   Card(
-//                       margin: EdgeInsets.all(10.0),
-//                       color: Colors.red,
-//                       shape: RoundedRectangleBorder(
-//                           side: BorderSide(color: Colors.red, width: 1),
-//                           borderRadius: BorderRadius.circular(15.0)
-//                       ),
-//                       elevation: 10,
-//                       semanticContainer: true,
-//                       child : Wrap(
-//                         children : <Widget>[
-//                           Container(
-//                               width : MediaQuery.of(context).size.width / 3,
-//                               padding: EdgeInsets.all(10.0),
-//                               child : Center(
-//                                 child : Text(
-//                                   "Blue flutter dadadas dsada dadas dadsa dasdsad dasdasd dasdas dasdaaasd dsda das ",
-//                                   textDirection: TextDirection.ltr,
-//                                   style: TextStyle(
-//                                       fontSize: 40.0,
-//                                       fontStyle: FontStyle.italic
-//                                   ),
-//
-//                                 ),
-//                               )
-//                           ),
-//                         ],
-//                       )
-//
-//
-//                   )
-//                 ]
-//
-//             ),
-//
-//               scrollDirection: Axis.horizontal,
-//         )
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          generateRandom();
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SecondPage(value : value.toString())),
-          );
-        },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.green,
-      ),
-    );
-
-
+    return getFirstView();
   }
 
-  int generateRandom(){
-    setState(() {
-      var random = Random();
-      value = random.nextInt(100);
-      print("Value : $value");
-    });
-  return value;
+  Widget getRow(int position) {
+    return filter == null || filter == ""
+        ? new Card(
+        elevation: 5.0,
+        margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+        shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.white, width: 1),
+            borderRadius: BorderRadius.circular(15.0)),
+        child: new Container(
+            padding: EdgeInsets.only(left : 0.0,top:5.0,bottom : 5.0,right : 5.0),
+            child: ListTile(
+                contentPadding: EdgeInsets.only(left : 15.0),
+                subtitle: Text(
+                  widgets[position].phone,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                title: Text(
+                  widgets[position].name,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                leading: getImage(position)
+            )))
+        : items[position].contains(filter)
+        ? new Card(
+        elevation: 5.0,
+        margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+        shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.white, width: 1),
+            borderRadius: BorderRadius.circular(15.0)),
+        child: new Container(
+          padding: EdgeInsets.all(10.0),
+          child: Text(
+            items[position],
+            textAlign: TextAlign.justify,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ))
+        : new Container();
+  }
+
+  Widget getImage(int i) {
+    return AspectRatio(
+        aspectRatio: 1 / 1,
+        child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100.0),
+                boxShadow: [
+                  BoxShadow(
+                      color: Color.fromARGB(60, 0, 0, 0),
+                      blurRadius: 3.0,
+                      offset: Offset(3.0, 3.0))
+                ],
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage('${widgets[i].image}')))));
+  }
+
+  _fetchListItem() async {
+    String dataURL = "https://ezvz.ofoodesk.com/public/api/getSearchData/a";
+    http.Response response = await http.get(dataURL);
+    widgets.clear();
+    items.clear();
+    for (Datum datum in jsonParseFromJson(response.body).data) {
+      widgets.add(datum);
+      items.add(datum.name);
+    }
+
+    return widgets;
+  }
+
+  Widget getFirstView(){
+    return Container(
+        child : FutureBuilder(
+            future: _fetchListItem(),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (!snapshot.hasData) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                return Container(
+                    child: ListView.builder(
+                        itemCount: widgets.length,
+                        itemBuilder: (BuildContext context, int position) {
+                          return getRow(position);
+                        }));
+              }
+            })
+    );
+
   }
 }
